@@ -1,0 +1,10 @@
+$('#cart').html("<%= escape_javascript render(@cart) %>");
+
+$('#current_item').css({'background-color':'#88ff88'}).animate({'background-color':'#114411'}, 1000);
+
+$( document ).ready(function() {
+		//This method is to hide the div in case when the user place an order and after placement, redirected to catalogue page with a notice of 'thanks for placing order'. If the user continues to shop and/or starts shopping again... then the thanks message persists on this page... this is to remove thanking message, at the right time as the user adds a new item to the cart for start shopping again.
+    if (document.getElementById('notice'))
+    	$("#notice").hide();
+});
+<!-- The above css is not animating background color -->

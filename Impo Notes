@@ -1,0 +1,15 @@
+Note1:
+In app/views/depot/app/views/line_items/create.js.erb, following line was written:
+page.replace_html('cart' , render(@cart)) 
+In book above line was written, but this line was causing an error of template missing so, I added the above line with the help of Ahmad Bhai and Ibraheem and replaced with the below line! Happy Coding :)
+$('#cart').html("<%= escape_javascript render(@cart) %>");
+
+
+Note2:
+11.3 functionality, high light functionality could not implemented!!! :(
+
+
+Note3:
+11.4 functionality, is added but not with the help of js
+implemented using this: <% unless cart.line_items.empty? %>
+Instead of: page[:cart].visual_effect :blind_down if @cart.total_items == 1

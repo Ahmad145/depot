@@ -1,10 +1,39 @@
 Rails.application.routes.draw do
-  resources :products
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # get 'admin/index'
+  get 'admin' => 'admin#index'  # is this line is alternate of above line???
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  ### The Above block is added and the above block has replaced this block ###
+  # get 'sessions/new'
+  # get 'sessions/create'
+  # get 'sessions/destroy'
+
+  # :local is in paranthesis, this is a way to say that :local is optional
+  scope '(:locale)' do
+    resources :users
+    # resources :user 
+    resources :orders
+    resources :line_items
+    resources :carts
+    # get 'store/index' # commented when I added "scope '(:locale)' do"
+
+    # resources :products # commented when I added "scope '(:locale)' do"
+
+    # The priority is based upon order of creation: first created -> highest priority.
+    # See how all your routes lay out with "rake routes".
+
+    # You can have the root of your site routed with "root"
+    # root 'welcome#index'
+    resources :products do
+      get :who_bought, :on => :member
+    end
+    root :to => 'store#index', :as => 'store' # This line is added to make the root and/or default route...!!!
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
